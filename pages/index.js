@@ -22,7 +22,7 @@ import 'swiper/css/grid'
 export default function DynamicPage({posts, deviceType}) {
 
 const { data } = useCombineData(`testimonials/?_fields=acf,title,id,slug,yoast_head_json.og_image,content&acf_format=standard`);
-  //console.log(posts);
+  console.log(posts);
 
 
   return (
@@ -287,12 +287,17 @@ export async function getServerSideProps(context) {
   try {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/pages/?slug=home&_fields=acf,yoast_head,title,id,slug&acf_format=standard&?version=${Math.random()}`);
     const posts = res.data;
-    if(posts.length){
+	
+	const resProduct = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}/products?per_page=4&page=1`, { withCredentials: true });
+    const getResProduct = resProduct.data;
+	  
+    if(post || getResProduct){
       return {
           props: {
             posts ,
             deviceType: isMobile ? 'mobile' : 'desktop',
-            page_id 
+            page_id,
+			getResProduct			
           }
       }
     }
