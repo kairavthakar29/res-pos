@@ -1,16 +1,39 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	source: '/api/:path*',
-	reactStrictMode: false,
-	 images: {
-	    domains: ['pos.achyut.live'],
-	  },
-	headers: [
-		{ key: "Access-Control-Allow-Credentials", value: "true" },
-		{ key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin
-		{ key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT" },
-		{ key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" },
-	]  
+  reactStrictMode: true,
+  trailingSlash: true,
+  images: {
+    domains: ['pos.achyut.live'],
+  },
+  async headers() {
+    return [
+      {
+        source: '/:all*(svg|jpg|png|webp)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          }
+        ],
+      },
+    ]
+  }
 }
 
-module.exports = nextConfig
+
+const pwaConfig = {
+  dest:"public",
+  register: true,
+  skipWaiting: true,
+};
+
+
+
+const withPWA = require('next-pwa')(pwaConfig);
+
+
+
+
+module.exports = withPWA(nextConfig);
+
