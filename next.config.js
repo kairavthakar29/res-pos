@@ -20,20 +20,5 @@ const nextConfig = {
     ]
   }
 }
-
-
-const pwaConfig = {
-  dest:"public",
-  register: true,
-  skipWaiting: true,
-};
-
-
-
-const withPWA = require('next-pwa')(pwaConfig);
-
-
-
-
 module.exports = withPWA(nextConfig);
 
