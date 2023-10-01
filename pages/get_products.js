@@ -134,14 +134,10 @@ export async function getServerSideProps(context) {
     const isMobile = Boolean(UA.match(
       /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     ))
-      context.res.setHeader(
-        'Cache-Control',
-        'public, s-maxage=43200, stale-while-revalidate=60'
-      )
   
     const page_id = 'product_section'
     try {
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}products?per_page=4&page=1`, { "Access-Control-Allow-Origin": "*" });
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}products?per_page=4&page=1`);
       const posts = res.data;
       if(posts.length){
         return {
