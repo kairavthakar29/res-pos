@@ -137,7 +137,7 @@ export async function getServerSideProps(context) {
   
     const page_id = 'product_section'
     try {
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}/products?per_page=4&page=1`);
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}/products?per_page=4&page=1`, { withCredentials: true });
       const posts = res.data;
       if(posts.length){
         return {
