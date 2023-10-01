@@ -3,7 +3,7 @@ const nextConfig = {
 	source: '/api/:path*',
 	reactStrictMode: false,
 	 images: {
-	    domains: ['localhost'],
+	    domains: ['res-jti35mund-kairavs-projects.vercel.app'],
 	  },
 	headers: [
 		{ key: "Access-Control-Allow-Credentials", value: "true" },
