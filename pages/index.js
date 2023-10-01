@@ -291,7 +291,7 @@ export async function getServerSideProps(context) {
 	const resProduct = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}/products?per_page=4&page=1`, { withCredentials: true });
     const getResProduct = resProduct.data;
 	  
-    if(post || getResProduct){
+    if(posts || getResProduct){
       return {
           props: {
             posts ,
