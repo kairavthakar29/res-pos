@@ -4,12 +4,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import parse from 'html-react-parser'
-// import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, EffectFade, Autoplay } from 'swiper'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useCombineData, useProductData } from '../components/globaldata'
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, EffectFade, Autoplay } from 'swiper/modules'
+import { useCombineData } from '../components/globaldata'
 import Products from './get_products'
+import Categories from './master_chef'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -21,8 +22,6 @@ import 'swiper/css/grid'
 export default function DynamicPage({posts, deviceType}) {
 
 const { data } = useCombineData(`testimonials/?_fields=acf,title,id,slug,yoast_head_json.og_image,content&acf_format=standard`);
-const { dataProducts } = useProductData(`products?per_page=4&page=1`);
-console.log("dataProducts " + dataProducts);
   //console.log(posts);
 
 
@@ -40,12 +39,11 @@ console.log("dataProducts " + dataProducts);
             <div className="main-slider-1 swiper">
              
                 <Swiper
-                    modules={[Navigation, Scrollbar, EffectFade]}
+                    modules={[Navigation, EffectFade]}
                     effect="fade"
                     spaceBetween={50}
                     slidesPerView={1}
                     navigation
-                    scrollbar={{ draggable: true }}
                     onSlideChange={() => console.log('slide change')}
                     onSwiper={(swiper) => console.log(swiper)}
                   >
@@ -97,87 +95,6 @@ console.log("dataProducts " + dataProducts);
                 <h2 className="title wow flipInX" data-wow-delay="0.2s">Quick Menu</h2>
               </div>
               <Products /> 
-              <div className="row inner-section-wrapper">
-                <div className="col-lg-3 col-md-6 col-sm-6 m-b30 wow fadeInUp" data-wow-delay="0.2s">
-                  <div className="dz-img-box style-3 box-hover">
-                    <div className="dz-media">
-                      <Image src="/images/gallery/grid2/pic2.jpg" alt="/" width="400" height="520"/>
-                    </div>
-                    <span className="dz-tag">TOP SELLER</span>
-                    <div className="dz-content">
-                      <h5 className="dz-title"><a href="our-menu-1.html">Pasta</a></h5>
-                      <p>Lorem ipsum dolor sit amet, dipiscing elit, sed</p>
-                    </div>
-                    <div className="dz-hover-content">
-                      <div className="dz-info">
-                        <h5 className="dz-title mb-0"><a href="our-menu-1.html">Pasta</a></h5>
-                        <span className="dz-price">$35.00</span>
-                      </div>
-                      <a href="shop-cart.html" className="btn btn-cart btn-white text-primary btn-square"><i className="flaticon-shopping-cart"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6 col-sm-6 m-b30 wow fadeInUp" data-wow-delay="0.4s">
-                  <div className="dz-img-box style-3 box-hover">
-                    <div className="dz-media">
-                      <Image src="/images/gallery/grid2/pic5.jpg" alt="/" width="400" height="520"/>
-                    </div>
-                    <span className="dz-tag">TOP SELLER</span>
-                    <div className="dz-content">
-                      <h5 className="dz-title"><a href="our-menu-1.html">Oreo Shake</a></h5>
-                      <p>Lorem ipsum dolor sit amet, dipiscing elit, sed</p>
-                    </div>
-                    <div className="dz-hover-content">
-                      <div className="dz-info">
-                        <h5 className="dz-title mb-0"><a href="our-menu-1.html">Shake</a></h5>
-                        <span className="dz-price">$55.00</span>
-                      </div>
-                      <a href="shop-cart.html" className="btn btn-cart btn-white text-primary btn-square"><i className="flaticon-shopping-cart"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6 col-sm-6 m-b30 wow fadeInUp" data-wow-delay="0.6s">
-                  <div className="dz-img-box style-3 box-hover">
-                    <div className="dz-media">
-                      <Image src="/images/gallery/grid2/pic4.jpg" alt="/" width="400" height="520"/>
-                    </div>
-                    <span className="dz-tag">TOP SELLER</span>
-                    <div className="dz-content">
-                      <h5 className="dz-title"><a href="our-menu-1.html">Dal Fry</a></h5>
-                      <p>Lorem ipsum dolor sit amet, dipiscing elit, sed</p>
-                    </div>
-                    <div className="dz-hover-content">
-                      <div className="dz-info">
-                        <h5 className="dz-title mb-0"><a href="our-menu-1.html">Dal</a></h5>
-                        <span className="dz-price">$25.00</span>
-                      </div>
-                      <a href="shop-cart.html" className="btn btn-cart btn-white text-primary btn-square"><i className="flaticon-shopping-cart"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6 col-sm-6 m-b30 wow fadeInUp" data-wow-delay="0.8s">
-                  <div className="dz-img-box style-3 box-hover">
-                    <div className="dz-media">
-                      <Image src="/images/gallery/grid2/pic6.jpg" alt="/" width="400" height="520" />
-                    </div>
-                    <span className="dz-tag">TOP SELLER</span>
-                    <div className="dz-content">
-                      <h5 className="dz-title"><a href="our-menu-1.html">Pizza</a></h5>
-                      <p>Lorem ipsum dolor sit amet, dipiscing elit, sed</p>
-                    </div>
-                    <div className="dz-hover-content">
-                      <div className="dz-info">
-                        <h5 className="dz-title mb-0"><a href="our-menu-1.html">Pizza</a></h5>
-                        <span className="dz-price">$90.00</span>
-                      </div>
-                      <a href="shop-cart.html" className="btn btn-cart btn-white text-primary btn-square"><i className="flaticon-shopping-cart"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-12 text-center m-t10">
-                  <a href="our-menu-2.html" className="btn btn-md btn-primary btn-hover-1"><span>See All Dishes</span></a>
-                </div>
-              </div>
               <div className="section-head text-center">
                 <h2 className="title wow flipInX" data-wow-delay="0.2s">Quality Services</h2>
               </div>
@@ -253,6 +170,20 @@ console.log("dataProducts " + dataProducts);
             <Image className="bg2 dz-parallax" data-parallax-speed="0.05" src="/images/background/pic4.png" alt="/" width="170" height="184"/>
           </section>
           {/* Image Box-3 */}
+
+          {/*Team Section 1 */}
+          <section className="content-inner-1 overflow-hidden bg-light section-wrapper-2">
+            <div className="container">
+              <div className="section-head text-center">
+                <h2 className="title wow flipInX" data-wow-delay="0.2s">Product category</h2>
+              </div>
+            </div>
+            <div className="container">
+             <Categories />
+            </div>
+            <Image className="bg2 dz-parallax" src="/images/background/pic3.png" alt="/" width="191" height="203" />
+          </section>
+          {/*Team Section 1 */}
 
           {/* Testimonials */}
           
