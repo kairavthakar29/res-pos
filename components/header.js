@@ -132,10 +132,10 @@ const [scroll, setScroll] = useState(false);
 						</div>
 						<div className="dz-social-icon">
 							<ul>
-								<li><a target="_blank" className="fab fa-facebook-f" href="https://www.facebook.com/"></a></li>
-								<li><a target="_blank" className="fab fa-twitter" href="https://twitter.com/"></a></li>
-								<li><a target="_blank" className="fab fa-linkedin-in" href="https://www.linkedin.com/"></a></li>
-								<li><a target="_blank" className="fab fa-instagram" href="https://www.instagram.com/"></a></li>
+								<li><a target="_blank" rel="noreferrer" className="fab fa-facebook-f" href="https://www.facebook.com/"></a></li>
+								<li><a target="_blank" rel="noreferrer" className="fab fa-twitter" href="https://twitter.com/"></a></li>
+								<li><a target="_blank" rel="noreferrer" className="fab fa-linkedin-in" href="https://www.linkedin.com/"></a></li>
+								<li><a target="_blank" rel="noreferrer" className="fab fa-instagram" href="https://www.instagram.com/"></a></li>
 							</ul>
 						</div>	
 					</div>
