@@ -4,7 +4,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import parse from 'html-react-parser'
-import { useCombineData } from '../components/globaldata'
 
 
 export default function DynamicPage({posts, deviceType}) {
