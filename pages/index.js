@@ -19,10 +19,10 @@ import 'swiper/css/effect-fade'
 import 'swiper/css/grid'
 
 
-export default function DynamicPage({posts, deviceType}) {
+export default function DynamicPage({posts, getResProduct, deviceType}) {
 
 const { data } = useCombineData(`testimonials/?_fields=acf,title,id,slug,yoast_head_json.og_image,content&acf_format=standard`);
-  console.log(posts);
+  console.log(getResProduct);
 
 
   return (
