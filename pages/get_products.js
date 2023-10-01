@@ -6,6 +6,7 @@ import Link from 'next/link'
 import parse from 'html-react-parser'
 
 export default function Products({posts, deviceType}){
+	console.log("products" + posts);
     return (
      posts ? 
                   
@@ -140,7 +141,7 @@ export async function getServerSideProps(context) {
   
     const page_id = 'product_section'
     try {
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}api/products?per_page=4&page=1`, { "Access-Control-Allow-Origin": "*" });
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}products?per_page=4&page=1`, { "Access-Control-Allow-Origin": "*" });
       const posts = res.data;
       if(posts.length){
         return {
