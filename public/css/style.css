@@ -62,6 +62,7 @@
 @import url("../icons/feather/css/iconfont.css");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 :root {
   --primary: #7DA640;
   --secondary: #FE9F10;
@@ -16545,13 +16546,18 @@ button:focus {
       .btn-prev i {
         font-size: 15px; } }
 
-.swiper-visible {
+.swiper-visible.swiper {
   overflow: unset; }
-  .swiper-visible .swiper-slide {
-    opacity: 0;
-    -webkit-transition: all 0.5s;
-    -ms-transition: all 0.5s;
-    transition: all 0.5s; }
+    .swiper-visible .swiper-slide {
+      opacity: 0;
+      -webkit-transition: all 0.5s;
+      -ms-transition: all 0.5s;
+      transition: all 0.5s; }
+
+.swiper-visible .swiper-slide-next + .swiper-slide, .swiper-visible .swiper-slide-next + .swiper-slide + .swiper-slide      
+{
+  opacity: 1;
+}
   .swiper-visible .swiper-slide-active,
   .swiper-visible:not(.swiper-single) .swiper-slide-next,
   .swiper-visible:not(.swiper-single) .swiper-slide-visible:not(.swiper-slide-duplicate-prev) {
@@ -16642,7 +16648,7 @@ button:focus {
 .btn-next-long:hover:not(.swiper-button-disabled) i {
   margin-right: 4px; }
 
-.swiper-btn-lr {
+.swiper-btn-lr.swiper {
   position: relative; }
   .swiper-btn-lr .btn-prev-long,
   .swiper-btn-lr .btn-next-long,
