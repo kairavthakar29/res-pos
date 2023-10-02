@@ -9,8 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, EffectFade, Autoplay } from 'swiper/modules'
 import { useCombineData } from '../components/globaldata'
-import Products from './get_products'
-import Categories from './master_chef'
+
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -19,10 +18,10 @@ import 'swiper/css/effect-fade'
 import 'swiper/css/grid'
 
 
-export default function DynamicPage({posts, getResProduct, deviceType}) {
+export default function DynamicPage({posts, getResProduct, getResCategories, deviceType}) {
 
 const { data } = useCombineData(`testimonials/?_fields=acf,title,id,slug,yoast_head_json.og_image,content&acf_format=standard`);
-  console.log(getResProduct);
+console.log(getResCategories);
 
 
   return (
@@ -94,7 +93,39 @@ const { data } = useCombineData(`testimonials/?_fields=acf,title,id,slug,yoast_h
               <div className="section-head text-center">
                 <h2 className="title wow flipInX" data-wow-delay="0.2s">Quick Menu</h2>
               </div>
-              <Products /> 
+              <div className="row inner-section-wrapper quick-menu">        
+              {	getResProduct ? 
+          
+				getResProduct.products.map((item, index) => {
+					return(
+				    <div className="col-lg-3 col-md-6 col-sm-6 m-b30 wow fadeInUp" data-wow-delay="0.2s">
+							<div className="dz-img-box style-3 box-hover">
+							<div className="dz-media products">
+								<Image src={item.images[0].upload_path} alt="/" width="400" height="520"/>
+							</div>
+							{/*<span className="dz-tag">TOP SELLER</span>*/}
+							<div className="dz-content">
+								<h5 className="dz-title"><Link href={'/product/'+item.products.name.toLowerCase().replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')}>{item.products.name}</Link></h5>
+								<p> {item.products.description.substring(0, 50)}...</p>
+							</div>
+							<div className="dz-hover-content">
+								<div className="dz-info">
+								<h5 className="dz-title mb-0"><Link href={'/product/'+item.products.name.toLowerCase().replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')}>{item.products.name}</Link></h5>
+								<span className="dz-price">${item.price}</span>
+								</div>
+								<Link href="/" className="btn btn-cart btn-white text-primary btn-square"><i className="flaticon-shopping-cart"></i></Link>
+							</div>
+							</div>
+						</div>
+          )
+							})
+           
+					: 
+					<></>
+				}
+         </div>
               <div className="section-head text-center">
                 <h2 className="title wow flipInX" data-wow-delay="0.2s">Quality Services</h2>
               </div>
@@ -179,7 +210,50 @@ const { data } = useCombineData(`testimonials/?_fields=acf,title,id,slug,yoast_h
               </div>
             </div>
             <div className="container">
-             <Categories />
+                  <Swiper
+                  className="team-swiper swiper-visible swiper-btn-lr"
+                  modules={[Autoplay, Navigation]}
+                  speed= {1000}
+                  parallax= {true}
+                  spaceBetween={30}
+                  slidesPerView={4}
+                  autoplay= {{delay: 2500}}
+                  navigation= {{
+                      nextEl: '.team-button-next',
+                      prevEl: '.team-button-prev',
+                  }}
+                  onSlideChange={() => console.log('slide change')}
+                  onSwiper={(swiper) => console.log(swiper)}
+                  >
+                  {getResCategories ?
+                  getResCategories.categories.map((item, index) => {
+
+                    return (
+                      <SwiperSlide key={index}>
+                          <div className="dz-team style-1 wow fadeInUp" data-wow-delay="0.2s">
+                          <div className="dz-media">
+                              <Image src="/images/team/pic1.jpg" alt="/" width="400" height="460" />
+                          </div>
+                          <div className="dz-content">
+                              <div className="clearfix">
+                              <h6 className="dz-name"><Link href={'/product-category/'+item.category.toLowerCase().replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')}>{item.category}</Link></h6>
+                              <span className="dz-position"><Link href={'/product-category/'+item.category.toLowerCase().replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')}>View Products</Link></span>
+                              </div>
+                          </div>
+                          </div>
+                      </SwiperSlide>
+                    )
+                  })
+                  : 
+                  <></>
+                }
+                 <div className="pagination mt-xl-0 m-t40">
+                      <div className="team-button-prev btn-prev-long"><i className="fa-solid fa-arrow-left"></i></div>
+                      <div className="team-button-next btn-next-long"><i className="fa-solid fa-arrow-right"></i></div>
+                  </div>
+                </Swiper>
             </div>
             <Image className="bg2 dz-parallax" src="/images/background/pic3.png" alt="/" width="191" height="203" />
           </section>
@@ -242,7 +316,7 @@ const { data } = useCombineData(`testimonials/?_fields=acf,title,id,slug,yoast_h
                             {parse(item.content.rendered)}
                           </div>
                           <div className="testimonial-info">
-                            <h5 className="testimonial-name">John Doe</h5>
+                            <h5 className="testimonial-name">{item.title.rendered}</h5>
                             <span className="testimonial-position">{item.acf.rolepassion}</span>
                           </div>
                           <i className="flaticon-right-quote quote"></i>
@@ -288,16 +362,20 @@ export async function getServerSideProps(context) {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/wp-json/wp/v2/pages/?slug=home&_fields=acf,yoast_head,title,id,slug&acf_format=standard&?version=${Math.random()}`);
     const posts = res.data;
 	
-	const resProduct = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}/products?per_page=4&page=1`, { withCredentials: true });
+	const resProduct = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}/products-for-restaurant?restaurant_id=1&per_page=8&page=1`, { withCredentials: true });
     const getResProduct = resProduct.data;
+	
+	const resCategories = await axios.get(`${process.env.NEXT_PUBLIC_POS_BASE_API_URL}/categories?per_page=10&restaurant_id=1&page=1`, { withCredentials: true });
+    const getResCategories = resCategories.data;
 	  
-    if(posts || getResProduct){
+    if(posts || getResProduct || getResCategories){
       return {
           props: {
             posts ,
             deviceType: isMobile ? 'mobile' : 'desktop',
             page_id,
-			getResProduct			
+			getResProduct,
+			getResCategories
           }
       }
     }

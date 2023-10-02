@@ -14,15 +14,16 @@ const [scroll, setScroll] = useState(false);
    window.addEventListener("scroll", () => {
      setScroll(window.scrollY > 50);
    });
+
  }, []);
 
     const { data} = useCombineData(`combine`);
     const router = useRouter();
-    const currentRoute = router.query;
-    //console.log(data);
+    const currentRoute = router.query.slug;
+    //console.log(currentRoute);
     return(
     <section>
-	<header className="site-header mo-left header header-transparent style-1">
+	<header className="site-header mo-left header header-transparent style-1" id={currentRoute ? 'nothome' : 'ishome'}>
 		
 		<div className={scroll ? "sticky-header main-bar-wraper navbar-expand-lg is-fixed" : "nofix sticky-header main-bar-wraper navbar-expand-lg" }>
 			<div className="main-bar clearfix ">
@@ -48,11 +49,6 @@ const [scroll, setScroll] = useState(false);
 					<div className="extra-nav">
 						<div className="extra-cell">
 							<ul>
-								<li>
-									<a className="btn btn-white btn-square btn-shadow" data-bs-toggle="offcanvas" href="#offcanvasLogin" role="button" aria-controls="offcanvasLogin">
-										<i className="flaticon-user"></i>
-									</a>
-								</li>
 								<li>
 									<button type="button" className="btn btn-white btn-square btn-shadow cart-btn">
 										<i className="flaticon-shopping-bag-1"></i>
@@ -132,10 +128,10 @@ const [scroll, setScroll] = useState(false);
 						</div>
 						<div className="dz-social-icon">
 							<ul>
-								<li><a target="_blank" rel="noreferrer" className="fab fa-facebook-f" href="https://www.facebook.com/"></a></li>
-								<li><a target="_blank" rel="noreferrer" className="fab fa-twitter" href="https://twitter.com/"></a></li>
-								<li><a target="_blank" rel="noreferrer" className="fab fa-linkedin-in" href="https://www.linkedin.com/"></a></li>
-								<li><a target="_blank" rel="noreferrer" className="fab fa-instagram" href="https://www.instagram.com/"></a></li>
+								<li><a target="_blank" className="fab fa-facebook-f" href="https://www.facebook.com/"></a></li>
+								<li><a target="_blank" className="fab fa-twitter" href="https://twitter.com/"></a></li>
+								<li><a target="_blank" className="fab fa-linkedin-in" href="https://www.linkedin.com/"></a></li>
+								<li><a target="_blank" className="fab fa-instagram" href="https://www.instagram.com/"></a></li>
 							</ul>
 						</div>	
 					</div>

@@ -11771,6 +11771,44 @@ section {
   width: 100%;
   background: lightgrey; }
 
+  div#content-wrap {
+    margin-bottom: 300px;
+}
+
+.category_page_info_pa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category_page_info_pa .btn.btn-cart.btn-white {
+  background: #7da640 !important;
+}
+
+.category_page_info_pa .btn.btn-cart.btn-white i {
+  color: #fff;
+}
+
+.catProducts h5.title a {
+  font-size: 18px;
+  min-height: 70px;
+  display: block;
+  line-height: 26px;
+}
+
+.MuiSlider-colorPrimary.css-187mznn-MuiSlider-root
+{
+  color: #7da640;
+}
+
+span.MuiSlider-valueLabelLabel {
+  position: relative;
+}
+
+span.MuiSlider-valueLabelLabel:before {
+  content: "$";
+}
+
 @media only screen and (min-width: 1200px) and (max-width: 1440px) {
   .col-xxl-1 {
     flex: 0 0 8.33333%;
@@ -12197,6 +12235,10 @@ section {
       @media only screen and (max-width: 991px) {
         .header-nav .nav > li.sub-menu-down.open > a::after {
           content: "\f078"; } }
+      #nothome .is-fixed .header-nav .nav > li > a {
+            color: #000;
+      }
+      #nothome .header-nav .nav > li > a{color:#fff;}
       .header-nav .nav > li > a {
         color: #071c35;
         font-size: 18px;
@@ -12717,6 +12759,7 @@ section {
   display: inline-block; }
   .anim-logo:after,
   .anim-logo-white:after {
+    display: none;
     content: "";
     animation-duration: 1.8s;
     animation-fill-mode: both;
@@ -12801,7 +12844,7 @@ section {
       line-height: 24px; } }
   .site-header.style-1 .header-nav .nav > li > a.active {
     color: var(--primary); }
-  .site-header.style-1 .header-nav .nav > li.active > a, .site-header.style-1 .header-nav .nav > li:hover > a {
+  .site-header.style-1 .header-nav .nav > li.active > a, .site-header.style-1 .header-nav .nav > li:hover > a, #nothome.site-header.style-1 .header-nav .nav > li:hover > a {
     color: var(--primary); }
     @media only screen and (min-width: 991px) {
       .site-header.style-1 .header-nav .nav > li.active > a::before, .site-header.style-1 .header-nav .nav > li:hover > a::before {
@@ -15999,7 +16042,9 @@ button:focus {
           padding: 20px 30px 0px 0; } }
 
 .widget.dz-widget_services .form-check {
-  margin-bottom: 15px; }
+  margin-bottom: 15px; 
+  padding-left: 0;
+}
   .widget.dz-widget_services .form-check .form-check-input {
     border: 1px solid rgba(34, 34, 34, 0.3);
     border-radius: 4px;
@@ -16010,7 +16055,7 @@ button:focus {
       border: 1px solid var(--primary); }
   .widget.dz-widget_services .form-check .form-check-label {
     font-family: var(--font-family-title);
-    margin-left: 10px;
+    margin-left: 0px;
     font-size: 15px; }
 
 @media only screen and (max-width: 991px) {
@@ -18248,10 +18293,15 @@ ul a.rsswidget {
         font-size: 15px;
         line-height: 24px;
         margin-bottom: 2px; }
+      .dz-media.products img {
+          object-fit: contain;
+          min-height: 350px;
+          object-position: top;
+      }
     .dz-img-box.style-3 .dz-hover-content {
       display: flex;
       justify-content: space-between;
-      padding: 20px 30px;
+      padding: 20px 20px;
       position: absolute;
       bottom: 0;
       opacity: 0;

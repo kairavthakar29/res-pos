@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   images: {
-    domains: ['pos.achyut.live'],
+    domains: ['pos.achyut.live', 'api.achyutlabs.software'],
   },
   async headers() {
     return [
