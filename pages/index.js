@@ -21,7 +21,7 @@ import 'swiper/css/grid'
 export default function DynamicPage({posts, getResProduct, getResCategories, deviceType}) {
 
 const { data } = useCombineData(`testimonials/?_fields=acf,title,id,slug,yoast_head_json.og_image,content&acf_format=standard`);
-console.log(getResCategories);
+console.log(getResProduct);
 
 
   return (
@@ -105,13 +105,15 @@ console.log(getResCategories);
 							</div>
 							{/*<span className="dz-tag">TOP SELLER</span>*/}
 							<div className="dz-content">
-								<h5 className="dz-title"><Link href={'/product/'+item.products.name.toLowerCase().replace(/ /g, '-')
+								<h5 className="dz-title"><Link href={'/'+item.products.categories.category.toLowerCase().replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')+'/'+item.products.name.toLowerCase().replace(/ /g, '-')
                 .replace(/[^\w-]+/g, '')}>{item.products.name}</Link></h5>
 								<p> {item.products.description.substring(0, 50)}...</p>
 							</div>
 							<div className="dz-hover-content">
 								<div className="dz-info">
-								<h5 className="dz-title mb-0"><Link href={'/product/'+item.products.name.toLowerCase().replace(/ /g, '-')
+								<h5 className="dz-title mb-0"><Link href={'/'+item.products.categories.category.toLowerCase().replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')+'/'+item.products.name.toLowerCase().replace(/ /g, '-')
                 .replace(/[^\w-]+/g, '')}>{item.products.name}</Link></h5>
 								<span className="dz-price">${item.price}</span>
 								</div>
