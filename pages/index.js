@@ -98,7 +98,7 @@ console.log(getResCategories);
           
 				getResProduct.products.map((item, index) => {
 					return(
-				    <div className="col-lg-3 col-md-6 col-sm-6 m-b30 wow fadeInUp" data-wow-delay="0.2s">
+				    <div className="col-lg-3 col-md-6 col-sm-6 m-b30 wow fadeInUp" data-wow-delay="0.2s" key={index}>
 							<div className="dz-img-box style-3 box-hover">
 							<div className="dz-media products">
 								<Image src={item.images[0].upload_path} alt="/" width="400" height="520"/>
